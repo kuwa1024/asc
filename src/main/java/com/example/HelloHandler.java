@@ -25,22 +25,17 @@ public class HelloHandler {
     Function<Mono<User>, Mono<Greeting>> hello;
 
     @FunctionName("hello")
-    public HttpResponseMessage execute(
-            @HttpTrigger(name = "request", methods = { HttpMethod.GET,
-                    HttpMethod.POST }, authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<User>> request,
+    public HttpResponseMessage execute(@HttpTrigger(name = "request",
+            methods = {HttpMethod.GET, HttpMethod.POST},
+            authLevel = AuthorizationLevel.ANONYMOUS) HttpRequestMessage<Optional<User>> request,
             ExecutionContext context) {
-        User user = request.getBody()
-                .filter((u -> u.getName() != null))
-                .orElseGet(() -> new User(
-                        request.getQueryParameters()
-                                .getOrDefault("name", "world")));
+        User user = request.getBody().filter((u -> u.getName() != null)).orElseGet(
+                () -> new User(request.getQueryParameters().getOrDefault("name", "world")));
 
         context.getLogger().info("DI Greeting user name: " + user.getName());
 
-        return request
-                .createResponseBuilder(HttpStatus.OK)
+        return request.createResponseBuilder(HttpStatus.OK)
                 .body(hello.apply(Mono.just(user)).block())
-                .header("Content-Type", "application/json")
-                .build();
+                .header("Content-Type", "application/json").build();
     }
 }
