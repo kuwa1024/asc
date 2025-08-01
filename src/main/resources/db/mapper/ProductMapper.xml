@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.asc.infrastructure.db.mapper.ProductMapper">
+
+  <!-- ResultMap: constructorでマッピング -->
+  <resultMap id="ProductMap" type="com.asc.domain.model.Product">
+    <constructor>
+      <idArg column="id" javaType="String" typeHandler="com.asc.util.LowercaseUuidTypeHandler"/>
+      <arg column="name" javaType="String"/>
+      <arg column="price" javaType="BigDecimal"/>
+      <arg column="remarks" javaType="String"/>
+    </constructor>
+  </resultMap>
+
+  <!-- SELECT例 -->
+  <select id="findById" resultMap="ProductMap" parameterType="string">
+    SELECT id, name, price, remarks
+    FROM product
+    WHERE id = #{id}
+  </select>
+
+  <!-- INSERT例 -->
+  <insert id="insert" parameterType="com.asc.domain.model.Product">
+    INSERT INTO product (id, name, price, remarks, created_at, updated_at)
+    VALUES (#{id}, #{name}, #{price}, #{remarks}, SYSDATETIME(), SYSDATETIME())
+  </insert>
+
+  <!-- UPDATE例 -->
+  <update id="update" parameterType="com.asc.domain.model.Product">
+    UPDATE product
+    SET name = #{name}, price = #{price}, remarks = #{remarks}, updated_at = SYSDATETIME()
+    WHERE id = #{id}
+  </update>
+
+  <!-- DELETE例 -->
+  <delete id="delete" parameterType="string">
+    DELETE FROM product
+    WHERE id = #{id}
+  </delete>
+
+</mapper>

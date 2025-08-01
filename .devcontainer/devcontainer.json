@@ -1,7 +1,7 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
 // README at: https://github.com/devcontainers/templates/tree/main/src/java-postgres
 {
-  "name": "Java & PostgreSQL",
+  "name": "Java 21 & Azure SQL",
   "dockerComposeFile": "docker-compose.yml",
   "service": "app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
@@ -10,10 +10,29 @@
   },
   "customizations": {
     "vscode": {
-      "settings": {},
+      "settings": {
+        "mssql.connections": [
+          {
+            "server": "localhost,1433",
+            "database": "master",
+            "authenticationType": "SqlLogin",
+            "user": "sa",
+            "password": "${env:MSSQL_SA_PASSWORD}",
+            "savePassword": true,
+            "profileName": "LocalDev",
+            "trustServerCertificate": true
+          }
+        ],
+        "sqlDatabaseProjects.dotnetSDK Location": "/usr/share/dotnet"
+      },
       "extensions": [
         "ms-azuretools.vscode-azurefunctions",
-        "vscjava.vscode-java-debug"
+        "ms-mssql.mssql",
+        "vscjava.vscode-java-pack",
+        "niko.vsc-mybatis",
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+        "google.geminicodeassist"
       ]
     }
   }
