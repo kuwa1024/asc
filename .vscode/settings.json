@@ -2,5 +2,10 @@
     "debug.internalConsoleOptions": "neverOpen",
     "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
     "java.format.settings.profile": "GoogleStyle",
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "azureFunctions.javaBuildTool": "maven",
+    "azureFunctions.deploySubpath": "target/azure-functions/asc-1754055094103",
+    "azureFunctions.projectLanguage": "Java",
+    "azureFunctions.projectRuntime": "~4",
+    "azureFunctions.preDeployTask": "package (functions)"
 }
