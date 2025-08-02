@@ -1,11 +1,10 @@
 package com.example;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import org.junit.jupiter.api.Test;
 import com.example.model.Greeting;
 import com.example.model.User;
-import org.junit.jupiter.api.Test;
 import reactor.core.publisher.Mono;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class HelloTest {
 

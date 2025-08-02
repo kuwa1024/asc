@@ -1,0 +1,11 @@
+CREATE TABLE product
+(
+    id UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    -- UUID
+    name NVARCHAR(255) NOT NULL,
+    -- 商品名（日本語対応）
+    created_at DATETIME2 NOT NULL DEFAULT SYSDATETIME(),
+    -- 作成日
+    updated_at DATETIME2 NOT NULL DEFAULT SYSDATETIME()
+    -- 更新日
+);

@@ -1,0 +1,12 @@
+spring:
+  datasource:
+    url: jdbc:sqlserver://localhost:1433;databaseName=example;encrypt=true;trustServerCertificate=true;
+    username: sa
+    password: P@ssw0rd!
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  flyway:
+    enabled: true                     # Flyway有効化（デフォルトtrue）
+    locations: classpath:db/migration # マイグレーションファイルのパス
+    baseline-on-migrate: true         # 既存DBに導入する場合はtrue
+    clean-disabled: true              # 誤操作でDB削除されるのを防ぐ

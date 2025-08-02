@@ -1,11 +1,10 @@
 package com.example;
 
+import java.util.function.Function;
+import org.springframework.stereotype.Component;
 import com.example.model.Greeting;
 import com.example.model.User;
-import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
-
-import java.util.function.Function;
 
 @Component
 public class Hello implements Function<Mono<User>, Mono<Greeting>> {
